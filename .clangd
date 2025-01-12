@@ -1,2 +1,2 @@
 CompileFlags:
-  Add: [-Wall, -Wextra, -std=c17, -xc, --target=riscv32, -ffreestanding, -nostdlib]
+  Add: [-I, include, -Wall, -Wextra, -std=c17, -xc, --target=riscv32, -ffreestanding, -nostdlib]

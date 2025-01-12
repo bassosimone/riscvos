@@ -5,17 +5,17 @@ set -euxo pipefail
 QEMU=qemu-system-riscv32
 
 CC=/opt/homebrew/opt/llvm/bin/clang
-CFLAGS="-std=c17 -O2 -g3 -Wall -Wextra --target=riscv32 -ffreestanding -nostdlib"
+CFLAGS="-std=c17 -O2 -g3 -Wall -Wextra --target=riscv32 -ffreestanding -nostdlib -I include"
 
 OBJCOPY=/opt/homebrew/opt/llvm/bin/llvm-objcopy
 
 # Build the shell (application)
-$CC $CFLAGS -Wl,-Tuser.ld -Wl,-Map=shell.map -o shell.elf shell.c user.c common.c
+$CC $CFLAGS -Wl,-Tuser.ld -Wl,-Map=shell.map -o shell.elf shell.c user.c lib/libc/stdio.c lib/libc/string.c
 $OBJCOPY --set-section-flags .bss=alloc,contents -O binary shell.elf shell.bin
 $OBJCOPY -Ibinary -Oelf32-littleriscv shell.bin shell.bin.o
 
 # Build the kernel
-$CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf common.c kernel.c shell.bin.o
+$CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf lib/libc/stdio.c lib/libc/string.c kernel.c shell.bin.o
 
 # Start QEMU
 $QEMU -machine virt -bios default -nographic -serial mon:stdio --no-reboot -kernel kernel.elf

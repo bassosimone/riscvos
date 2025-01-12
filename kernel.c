@@ -4,8 +4,15 @@
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
 
-#define __kernel__
-#include "common.h"
+#include <asm/page.h>
+#include <kernel/compiler.h>
+#include <kernel/mm.h>
+#include <sys/syscall.h>
+
+#include <stdint.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
 
 struct sbiret {
     long error;

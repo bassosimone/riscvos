@@ -11,6 +11,8 @@
 
 __BEGIN_DECLS
 
+int getchar(void) __NOEXCEPT;
+
 int printf(const char *fmt, ...) __NOEXCEPT;
 
 int putchar(int c) __NOEXCEPT;

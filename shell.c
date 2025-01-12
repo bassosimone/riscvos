@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
-#include "user.h"
+#include <stdlib.h>
 
 void main(void) {
     while (1) {
@@ -26,7 +25,7 @@ prompt:
         if (strcmp(cmdline, "hello") == 0)
             printf("Hello world from shell!\n");
         else if (strcmp(cmdline, "exit") == 0)
-            exit();
+            exit(1);
         else
             printf("unknown command: %s\n", cmdline);
     }

@@ -135,7 +135,7 @@ int putchar(int ch) {
     return 0;
 }
 
-long getchar(void) {
+int getchar(void) {
     struct sbiret ret = sbi_call(0, 0, 0, 0, 0, 0, 0, 2);
     return ret.error;
 }

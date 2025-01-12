@@ -1,3 +1,5 @@
+#define __kernel__
+
 #include "kernel.h"
 #include "common.h"
 
@@ -54,7 +56,7 @@ void handle_syscall(struct trap_frame *f) {
             }
             break;
         case SYS_EXIT:
-            printk("process %d exited\n", current_proc->pid);
+            printf("process %d exited\n", current_proc->pid);
             current_proc->state = PROC_EXITED;
             yield();
             panic("unreachable");
@@ -365,7 +367,7 @@ struct process *proc_a;
 struct process *proc_b;
 
 void proc_a_entry(void) {
-    printk("starting process A\n");
+    printf("starting process A\n");
     while (1) {
         putchar('A');
         yield();
@@ -373,7 +375,7 @@ void proc_a_entry(void) {
 }
 
 void proc_b_entry(void) {
-    printk("starting process B\n");
+    printf("starting process B\n");
     while (1) {
         putchar('B');
         yield();

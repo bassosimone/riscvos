@@ -1,6 +1,7 @@
 #ifndef __KERNEL_H__
 #define __KERNEL_H__
 
+#define __kernel__
 #include "common.h"
 
 struct sbiret {
@@ -67,7 +68,6 @@ struct trap_frame {
 #define PROC_UNUSED   0   // Unused process control structure
 #define PROC_RUNNABLE 1   // Runnable process
 #define PROC_EXITED   2
-
 
 struct process {
     int pid;              // Process ID

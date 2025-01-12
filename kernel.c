@@ -1,6 +1,3 @@
-#define __kernel__
-
-#include "common.h"
 #include "kernel.h"
 
 extern char __bss[], __bss_end[], __stack_top[];

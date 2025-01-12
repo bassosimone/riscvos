@@ -5,7 +5,7 @@ set -euxo pipefail
 QEMU=qemu-system-riscv32
 
 CC=/opt/homebrew/opt/llvm/bin/clang
-CFLAGS="-std=c11 -O2 -g3 -Wall -Wextra --target=riscv32 -ffreestanding -nostdlib"
+CFLAGS="-std=c17 -O2 -g3 -Wall -Wextra --target=riscv32 -ffreestanding -nostdlib"
 
 OBJCOPY=/opt/homebrew/opt/llvm/bin/llvm-objcopy
 

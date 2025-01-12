@@ -7,8 +7,6 @@
 #define __kernel__
 #include "common.h"
 
-// <riscv32.h> - RISC-V 32 bit specific definitions
-
 struct sbiret {
     long error;
     long value;
@@ -61,8 +59,6 @@ struct trap_frame {
         __asm__ __volatile__("csrw " #reg ", %0" ::"r"(__tmp));                \
     } while (0)
 
-// <kernel/panic.h> - Kernel panic macro
-
 #define panic(fmt, ...)                                                        \
     do {                                                                       \
         printf("panic: %s:%d: " fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__);  \
@@ -84,8 +80,6 @@ struct trap_frame {
 #define SSTATUS_SPIE (1 << 5)
 
 #define SCAUSE_ECALL 8
-
-// <kernel/sched.h> - Process control structures
 
 // Maximum number of processes
 #define PROCS_MAX 8
@@ -460,31 +454,6 @@ void yield(void) {
     struct process *prev = current_proc;
     current_proc = next;
     switch_context(&prev->sp, &next->sp);
-}
-
-void delay(void) {
-    for (int i = 0; i < 30000000; i++) {
-        __asm__ __volatile__("nop"); // do nothing
-    }
-}
-
-struct process *proc_a;
-struct process *proc_b;
-
-void proc_a_entry(void) {
-    printf("starting process A\n");
-    while (1) {
-        putchar('A');
-        yield();
-    }
-}
-
-void proc_b_entry(void) {
-    printf("starting process B\n");
-    while (1) {
-        putchar('B');
-        yield();
-    }
 }
 
 void kernel_main(void) {

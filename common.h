@@ -48,6 +48,7 @@ int strcmp(const char *s1, const char *s2);
 
 // <stdio.h> - standard I/O functions
 int printf(const char *fmt, ...);
+int putchar(int c);
 
 // <asm/page.h> - paging specific code
 #define PAGE_SIZE 4096

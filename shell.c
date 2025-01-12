@@ -1,3 +1,4 @@
+#include "common.h"
 #include "user.h"
 
 void main(void) {

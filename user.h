@@ -1,10 +1,7 @@
 #ifndef __USER_H__
 #define __USER_H__
 
-#include "common.h"
-
-__attribute__((noreturn)) void exit(void);
-void putchar(char ch);
+[[noreturn]] void exit(void);
 int getchar(void);
 int syscall(int sysno, int arg0, int arg1, int arg2);
 

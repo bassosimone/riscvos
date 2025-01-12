@@ -47,10 +47,6 @@ int strcmp(const char *s1, const char *s2) {
 
 // <stdio.h> - standard I/O functions
 
-// Forward declaration: this is actually implemented either by
-// the kernel or by user space depending on what we're building.
-void putchar(char ch);
-
 static int printf_string(const char *s) {
     while (*s) {
         putchar(*s);

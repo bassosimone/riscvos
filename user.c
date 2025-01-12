@@ -1,3 +1,4 @@
+#include "common.h"
 #include "user.h"
 
 extern char __stack_top[];
@@ -7,8 +8,9 @@ __attribute__((noreturn)) void exit(void) {
     for (;;); // Just in case!
 }
 
-void putchar(char c) {
+int putchar(int c) {
     syscall(SYS_PUTCHAR, c, 0, 0);
+    return 0;
 }
 
 int getchar(void) {

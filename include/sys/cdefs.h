@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// Helpers for writing C++ compatible headers.
+//
 
 #ifndef __SYS_CDEFS_H__
 #define __SYS_CDEFS_H__

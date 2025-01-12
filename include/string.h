@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// String operations.
+//
 
 #ifndef __STRING_H__
 #define __STRING_H__

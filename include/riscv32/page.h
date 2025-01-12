@@ -9,6 +9,7 @@
 #ifndef __RISCV32_PAGE_H__
 #define __RISCV32_PAGE_H__
 
+// Size in bytes of a page.
 #define PAGE_SIZE 4096
 
 // Supervisor Address Translation and Protection (SATP) register.

@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// Boolean type and values when not using C++.
+//
 
 #ifndef __STDBOOL_H__
 #define __STDBOOL_H__

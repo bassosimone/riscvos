@@ -12,8 +12,9 @@
 #include <asm/types.h>
 #include <sys/cdefs.h>
 
-typedef __paddr_t paddr_t;
-typedef __vaddr_t vaddr_t;
+// Physical and virtual addresses are 32-bit wide.
+typedef uint32_t paddr_t;
+typedef uint32_t vaddr_t;
 
 __BEGIN_DECLS
 

@@ -15,7 +15,7 @@
 // Maximum number of processes
 #define PROCS_MAX 8
 
-// Unused process control structure
+// Unused process control block
 #define PROC_UNUSED 0
 
 // Runnable process

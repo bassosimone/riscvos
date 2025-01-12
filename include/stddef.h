@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// Standard definitions.
+//
 
 #ifndef __STDDEF_H__
 #define __STDDEF_H__

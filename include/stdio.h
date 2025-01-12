@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// Standard input/output definitions.
+//
 
 #ifndef __STDIO_H__
 #define __STDIO_H__

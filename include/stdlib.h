@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// Standard library definitions.
+//
 
 #ifndef __STDLIB_H__
 #define __STDLIB_H__

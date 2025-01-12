@@ -3,6 +3,8 @@
 //
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
+// Taking advantage of compiler builtins.
+//
 
 #ifndef __KERNEL_COMPILER_H__
 #define __KERNEL_COMPILER_H__

@@ -12,7 +12,6 @@
 
 #include <sys/syscall.h>
 
-
 static void handle_syscall(struct trap_frame *f) {
     switch (f->a3) {
     case SYS_PUTCHAR:
@@ -40,6 +39,7 @@ static void handle_syscall(struct trap_frame *f) {
         panic("unreachable");
 
     default:
+        // TODO(bassosimone): should this be a panic?!
         panic("unexpected syscall a3=%x\n", f->a3);
     }
 }

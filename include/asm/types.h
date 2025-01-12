@@ -13,4 +13,7 @@ typedef unsigned int uint32_t;
 typedef unsigned long long uint64_t;
 typedef uint32_t size_t;
 
+typedef uint32_t __paddr_t;
+typedef uint32_t __vaddr_t;
+
 #endif // __ASM_TYPES_H__

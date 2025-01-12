@@ -7,9 +7,9 @@
 #ifndef __KERNEL_MM_H__
 #define __KERNEL_MM_H__
 
-#include <sys/types.h>
+#include <asm/types.h>
 
-typedef uint32_t paddr_t;
-typedef uint32_t vaddr_t;
+typedef __paddr_t paddr_t;
+typedef __vaddr_t vaddr_t;
 
 #endif // __KERNEL_MM_H__

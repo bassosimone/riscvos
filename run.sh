@@ -10,7 +10,7 @@ CFLAGS="-std=c17 -O2 -g3 -Wall -Wextra --target=riscv32 -ffreestanding -nostdlib
 OBJCOPY=/opt/homebrew/opt/llvm/bin/llvm-objcopy
 
 # Build the shell (application)
-$CC $CFLAGS -Wl,-Tuser.ld -Wl,-Map=shell.map -o shell.elf shell.c lib/libkern/stdio.c lib/libkern/string.c lib/libc/riscv32/syscall.c lib/libc/riscv32/crt0.c lib/libc/stdio.c lib/libc/stdlib.c
+$CC $CFLAGS -Wl,-Tuser.ld -Wl,-Map=shell.map -o shell.elf bin/shell/shell.c lib/libkern/stdio.c lib/libkern/string.c lib/libc/riscv32/syscall.c lib/libc/riscv32/crt0.c lib/libc/stdio.c lib/libc/stdlib.c
 $OBJCOPY --set-section-flags .bss=alloc,contents -O binary shell.elf shell.bin
 $OBJCOPY -Ibinary -Oelf32-littleriscv shell.bin shell.bin.o
 

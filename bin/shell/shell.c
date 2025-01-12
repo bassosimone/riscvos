@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void main(void) {
+int main(void) {
     while (1) {
 prompt:
         printf("> ");
@@ -22,11 +22,13 @@ prompt:
             }
         }
 
-        if (strcmp(cmdline, "hello") == 0)
+        if (strcmp(cmdline, "hello") == 0) {
             printf("Hello world from shell!\n");
-        else if (strcmp(cmdline, "exit") == 0)
+        } else if (strcmp(cmdline, "exit") == 0) {
             exit(1);
-        else
+        } else {
             printf("unknown command: %s\n", cmdline);
+        }
     }
+    return 0;
 }

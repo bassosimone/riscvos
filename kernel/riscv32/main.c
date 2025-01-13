@@ -6,11 +6,11 @@
 // Kernel entry point.
 //
 
-#include <riscv32/kernel_layout.h>
-#include <riscv32/trap.h>
-
 #include <kernel/panic.h>
-#include <kernel/proc.h>
+#include <riscv32/kernel_layout.h>
+#include <riscv32/proc.h>
+#include <riscv32/trap.h>
+#include <sys/syscall.h>
 
 #include <string.h>
 #include <stddef.h>

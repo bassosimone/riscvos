@@ -5,7 +5,7 @@
 //
 
 #include <kernel/panic.h>
-#include <kernel/proc.h>
+#include <riscv32/proc.h>
 #include <riscv32/trap.h>
 #include <sys/errno.h>
 #include <sys/syscall.h>

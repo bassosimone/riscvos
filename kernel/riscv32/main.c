@@ -7,10 +7,10 @@
 //
 
 #include <riscv32/kernel_layout.h>
-#include <riscv32/proc.h>
 #include <riscv32/trap.h>
 
 #include <kernel/panic.h>
+#include <kernel/proc.h>
 
 #include <string.h>
 #include <stddef.h>
@@ -25,7 +25,8 @@ void __kernel_main(void) {
     idle_proc->pid = -1; // idle
     current_proc = idle_proc;
 
-    create_process(_binary_shell_bin_start, (size_t)_binary_shell_bin_size);
+    struct process *shproc = create_process(_binary_shell_bin_start, (size_t)_binary_shell_bin_size);
+    shproc->capabilities |= CAP_CONSOLE_READWRITE;
     yield();
     panic("switched to idle process");
 }

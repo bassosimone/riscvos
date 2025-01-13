@@ -7,8 +7,8 @@
 #include <sys/syscall.h>
 
 int putchar(int c) {
-    __syscall3(SYS_PUTCHAR, c, 0, 0);
-    return 0;
+    // TODO(bassosimone): how do we deal with errno?
+    return __syscall3(SYS_PUTCHAR, c, 0, 0);
 }
 
 int getchar(void) {

@@ -40,6 +40,9 @@ struct process {
 
     // Kernel stack
     uint8_t stack[8192];
+
+    // Capabilities
+    uint32_t capabilities;
 };
 
 // The base virtual address of an application image. This needs

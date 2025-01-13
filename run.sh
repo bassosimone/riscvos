@@ -15,7 +15,7 @@ $OBJCOPY --set-section-flags .bss=alloc,contents -O binary shell.elf shell.bin
 $OBJCOPY -Ibinary -Oelf32-littleriscv shell.bin shell.bin.o
 
 # Build the kernel
-$CC $CFLAGS -Wl,-Tkernel/riscv32/kernel.ld -Wl,-Map=kernel.map -o kernel.elf lib/libkern/stdio.c lib/libkern/string.c kernel/riscv32/console.c kernel/riscv32/main.c kernel/riscv32/mm.c kernel/riscv32/proc.c kernel/riscv32/sbi.c kernel/riscv32/trap.c shell.bin.o
+$CC $CFLAGS -Wl,-Tkernel/riscv32/kernel.ld -Wl,-Map=kernel.map -o kernel.elf lib/libkern/stdio.c lib/libkern/string.c kernel/riscv32/console.c kernel/riscv32/main.c kernel/riscv32/mm.c kernel/riscv32/proc.c kernel/riscv32/sbi.c kernel/riscv32/syscall.c kernel/riscv32/trap.c shell.bin.o
 
 # Start QEMU
 $QEMU -machine virt -bios default -nographic -serial mon:stdio --no-reboot -kernel kernel.elf

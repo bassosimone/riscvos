@@ -10,39 +10,10 @@
 
 #include <kernel/panic.h>
 
+#include <sys/errno.h>
 #include <sys/syscall.h>
 
-static void handle_syscall(struct trap_frame *f) {
-    switch (f->a3) {
-    case SYS_PUTCHAR:
-        putchar(f->a0);
-        break;
 
-    case SYS_GETCHAR:
-        while (1) {
-            long ch = getchar();
-            if (ch >= 0) {
-                f->a0 = ch;
-                break;
-            }
-
-            yield();
-        }
-        break;
-
-    case SYS_EXIT:
-        // TODO(bassosimone): this should probably be implemented
-        // inside the proc.c file rather than exporting globals
-        printf("process %d exited\n", current_proc->pid);
-        current_proc->state = PROC_EXITED;
-        yield();
-        panic("unreachable");
-
-    default:
-        // TODO(bassosimone): should this be a panic?!
-        panic("unexpected syscall a3=%x\n", f->a3);
-    }
-}
 
 void __handle_trap(struct trap_frame *f) {
     uint32_t scause = READ_CSR(scause);

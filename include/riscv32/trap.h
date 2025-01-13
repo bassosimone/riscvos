@@ -71,6 +71,9 @@ __BEGIN_DECLS
 // Invoked to handle traps.
 __attribute__((naked)) __attribute__((aligned(4))) void kernel_entry(void);
 
+// Handles a given system call.
+void handle_syscall(struct trap_frame *f) __NOEXCEPT;
+
 __END_DECLS
 
 #endif // __RISCV32_TRAP_H__

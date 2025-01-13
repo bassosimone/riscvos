@@ -8,6 +8,7 @@
 #define __SYS_SYSCALL_H__
 
 #include <sys/cdefs.h>
+#include <sys/types.h>
 
 // Allows a process to read/write the console.
 #define CAP_CONSOLE_READWRITE (1 << 0)
@@ -30,8 +31,9 @@ struct trap_frame;
 
 __BEGIN_DECLS
 
-// Invoke a syscall with three arguments.
-int __syscall3(int sysno, int arg0, int arg1, int arg2) __NOEXCEPT;
+// Invoke a syscall with three register-size arguments.
+int __syscall3(register_t sysno, register_t arg0, register_t arg1,
+               register_t arg2) __NOEXCEPT;
 
 // Handles a given system call inside the kernel.
 void handle_syscall(struct trap_frame *f) __NOEXCEPT;

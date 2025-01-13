@@ -15,16 +15,25 @@
 
 // Writes the given character to the console.
 //
-// Requires CAP_CONSOLE_READWRITE.
+// This syscall is an alias for SYS_PORT_WRITE with PORT_CONSOLE.
 #define SYS_PUTCHAR 1
 
 // Reads a character from the console.
 //
-// Requires CAP_CONSOLE_READWRITE.
+// This syscall is an alias for SYS_PORT_READ with PORT_CONSOLE.
 #define SYS_GETCHAR 2
 
 // Exits the current process.
 #define SYS_EXIT 3
+
+// Reads from a well-known I/O port.
+#define SYS_PORT_READ 4
+
+// Writes to a well-known I/O port.
+#define SYS_PORT_WRITE 5
+
+// Well-known I/O port for the serial console.
+#define PORT_CONSOLE 1
 
 // Forward declare the trap frame structure.
 struct trap_frame;

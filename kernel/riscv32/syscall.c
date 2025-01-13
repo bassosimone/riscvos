@@ -4,57 +4,61 @@
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
 
+#include <kernel/console.h>
 #include <kernel/panic.h>
 #include <riscv32/proc.h>
 #include <riscv32/trap.h>
 #include <sys/errno.h>
 #include <sys/syscall.h>
 
-#include <stdio.h>
-
-static void sys_putchar(struct trap_frame *f) {
-    if ((current_proc->capabilities & CAP_CONSOLE_READWRITE) == 0) {
-        f->a0 = -EPERM;
-        return;
-    }
-    putchar(f->a0);
-}
-
-static void sys_getchar(struct trap_frame *f) {
-    if ((current_proc->capabilities & CAP_CONSOLE_READWRITE) == 0) {
-        f->a0 = -EPERM;
-        return;
-    }
-    while (1) {
-        long ch = getchar();
-        if (ch >= 0) {
-            f->a0 = ch;
-            return;
-        }
-        yield();
-    }
-}
-
-static void sys_exit(struct trap_frame *f) {
-    (void)f; // TODO(bassosimone): save the exit code
-    printf("process %d exited\n", current_proc->pid);
+[[noreturn]] static void sys_exit(register_t arg2) {
+    (void)arg2; // TODO(bassosimone): save the exit code
     current_proc->state = PROC_EXITED;
     yield();
     panic("unreachable");
 }
 
+static register_t sys_port_read(register_t arg0, register_t arg1, register_t arg2) {
+    switch (arg1) {
+    case PORT_CONSOLE:
+        (void)arg0, (void)arg2;
+        return console_read();
+    default:
+        return -EINVAL;
+    }
+}
+
+
+static register_t sys_port_write(register_t arg0, register_t arg1, register_t arg2) {
+    switch (arg1) {
+    case PORT_CONSOLE:
+        (void)arg0;
+        return console_write(arg2);
+    default:
+        return -EINVAL;
+    }
+}
+
 void handle_syscall(struct trap_frame *f) {
     switch (f->a3) {
     case SYS_PUTCHAR:
-        sys_putchar(f);
+        f->a0 = sys_port_write(0, PORT_CONSOLE, f->a0);
         return;
 
     case SYS_GETCHAR:
-        sys_getchar(f);
+        f->a0 = sys_port_read(0, PORT_CONSOLE, 0);
         return;
 
     case SYS_EXIT:
-        sys_exit(f);
+        sys_exit(f->a2);
+        return;
+
+    case SYS_PORT_READ:
+        f->a0 = sys_port_read(f->a0, f->a1, f->a2);
+        return;
+
+    case SYS_PORT_WRITE:
+        f->a0 = sys_port_write(f->a0, f->a1, f->a2);
         return;
 
     default:

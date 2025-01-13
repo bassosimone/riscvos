@@ -4,7 +4,11 @@
 // Adapted from: https://github.com/nuta/operating-system-in-1000-lines
 //
 
+#include <kernel/console.h>
 #include <riscv32/sbi.h>
+#include <riscv32/proc.h>
+#include <sys/errno.h>
+#include <sys/syscall.h>
 
 #include <stdio.h>
 
@@ -13,7 +17,28 @@ int putchar(int ch) {
     return 0;
 }
 
+register_t console_write(register_t ch) {
+    if ((current_proc->capabilities & CAP_CONSOLE_READWRITE) == 0) {
+        return -EPERM;
+    }
+    putchar(ch);
+    return 0;
+}
+
 int getchar(void) {
     struct sbiret ret = sbi_call(0, 0, 0, 0, 0, 0, 0, 2 /* Console Getchar */);
     return ret.error;
+}
+
+register_t console_read(void) {
+    if ((current_proc->capabilities & CAP_CONSOLE_READWRITE) == 0) {
+        return -EPERM;
+    }
+    while (1) {
+        long ch = getchar();
+        if (ch >= 0) {
+            return ch;
+        }
+        yield();
+    }
 }

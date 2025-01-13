@@ -9,6 +9,6 @@
 
 [[noreturn]] void exit(int exitcode) {
     (void)exitcode;
-    __syscall3(SYS_EXIT, 0, 0, 0);
+    __syscall3(SYS_EXIT, 0, 0, exitcode);
     for (;;); // Just in case!
 }

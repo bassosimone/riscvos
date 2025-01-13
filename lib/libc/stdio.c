@@ -6,11 +6,22 @@
 
 #include <sys/syscall.h>
 
+#include <stdio.h>
+
 int putchar(int c) {
-    // TODO(bassosimone): how do we deal with errno?
-    return __syscall3(SYS_PUTCHAR, c, 0, 0);
+    register_t retval = __syscall3(SYS_PORT_WRITE, 0, PORT_CONSOLE, c);
+    if (retval < 0) {
+        // TODO(bassosimone): how do we deal with errno?
+        return EOF;
+    }
+    return c;
 }
 
 int getchar(void) {
-    return __syscall3(SYS_GETCHAR, 0, 0, 0);
+    register_t retval = __syscall3(SYS_PORT_WRITE, 0, PORT_CONSOLE, 0);
+    if (retval < 0) {
+        // TODO(bassosimone): how do we deal with errno?
+        return EOF;
+    }
+    return retval;
 }

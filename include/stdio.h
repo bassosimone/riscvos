@@ -11,6 +11,9 @@
 
 #include <sys/cdefs.h>
 
+// Indicates that the end of the file has been reached.
+#define EOF (-1)
+
 __BEGIN_DECLS
 
 int getchar(void) __NOEXCEPT;

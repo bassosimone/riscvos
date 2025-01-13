@@ -18,7 +18,8 @@
     panic("unreachable");
 }
 
-static register_t sys_port_read(register_t arg0, register_t arg1, register_t arg2) {
+static register_t sys_port_read(register_t arg0, register_t arg1,
+                                register_t arg2) {
     switch (arg1) {
     case PORT_CONSOLE:
         (void)arg0, (void)arg2;
@@ -28,8 +29,8 @@ static register_t sys_port_read(register_t arg0, register_t arg1, register_t arg
     }
 }
 
-
-static register_t sys_port_write(register_t arg0, register_t arg1, register_t arg2) {
+static register_t sys_port_write(register_t arg0, register_t arg1,
+                                 register_t arg2) {
     switch (arg1) {
     case PORT_CONSOLE:
         (void)arg0;

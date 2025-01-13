@@ -15,7 +15,6 @@
     (void)arg2; // TODO(bassosimone): save the exit code
     current_proc->state = PROC_EXITED;
     yield();
-    panic("unreachable");
 }
 
 static register_t sys_port_read(register_t arg0, register_t arg1,
@@ -52,7 +51,8 @@ void handle_syscall(struct trap_frame *f) {
 
     case SYS_EXIT:
         sys_exit(f->a2);
-        return;
+        panic("unreachable code");
+        /* NOTREACHED */
 
     case SYS_PORT_READ:
         f->a0 = sys_port_read(f->a0, f->a1, f->a2);

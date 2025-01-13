@@ -21,8 +21,7 @@ register_t console_write(register_t ch) {
     if ((current_proc->capabilities & CAP_CONSOLE_READWRITE) == 0) {
         return -EPERM;
     }
-    putchar(ch);
-    return 0;
+    return putchar(ch);
 }
 
 int getchar(void) {
@@ -35,7 +34,7 @@ register_t console_read(void) {
         return -EPERM;
     }
     while (1) {
-        long ch = getchar();
+        register_t ch = getchar();
         if (ch >= 0) {
             return ch;
         }

@@ -41,8 +41,8 @@ struct trap_frame;
 __BEGIN_DECLS
 
 // Invoke a syscall with three register-size arguments.
-int __syscall3(register_t sysno, register_t arg0, register_t arg1,
-               register_t arg2) __NOEXCEPT;
+register_t __syscall3(register_t sysno, register_t arg0, register_t arg1,
+                      register_t arg2) __NOEXCEPT;
 
 // Handles a given system call inside the kernel.
 void handle_syscall(struct trap_frame *f) __NOEXCEPT;

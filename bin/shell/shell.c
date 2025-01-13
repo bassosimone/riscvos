@@ -7,6 +7,8 @@ int main(void) {
 prompt:
         printf("> ");
         char cmdline[128];
+        // TODO(bassosimone): for some reason recent commits
+        // broke this loop that now runs forever.
         for (int i = 0;; i++) {
             char ch = getchar();
             putchar(ch);
